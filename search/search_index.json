@@ -1,0 +1,344 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "User Guide\n\ue157\n\n\nOverview\n\ue157\n\n\nHex Viewer is a plugin for Sublime Text that allows the toggling of a file into a hex viewing mode.  Hex Viewer also supports hex editing.\n\n\n\n\nFeatures\n\ue157\n\n\n\n\nView any file (that exist on disk) in a hex format showing both byte and ASCII representation.\n\n\nCommand to jump to a specific address.\n\n\nIn place editing of bytes or ASCII chars.\n\n\nHighlight selected byte \nand\n ASCII code.\n\n\nInspection panel showing different integer representation at the cursor position.\n\n\nConfigurable display of byte grouping, bytes per line, endianness.\n\n\nExport hex view to a binary file.\n\n\nGet the checksum of a given file (various checksums are available).\n\n\nGenerate checksum/hash from input via panel or text selection.\n\n\nOptionally auto convert binary to hex view.\n\n\n\n\nCommands\n\ue157\n\n\nThere are various commands available via the command palette or by key-bindings. Below outlines what the commands are and what they do.\n\n\nHexViewer: Toggle Hex View\n\ue157\n\n\nToggles file in or out of hex view.\n\n\nHexViewer: Reload Hex View\n\ue157\n\n\nReloads the current hex view.  All edits will be lost.\n\n\nHexViewer: Show Hex Inspector\n\ue157\n\n\nShow the Hex Inspector panel.  The Hex Inspector is a panel which shows the current selected byte as different unit types.\n\n\n\n\n\n\n\n\nName\n\n\nSigned\n\n\nBits\n\n\n\n\n\n\n\n\n\n\nByte\n\n\nUnsigned\n\n\n8\n\n\n\n\n\n\nShort\n\n\nSigned\n\n\n8\n\n\n\n\n\n\nWord\n\n\nUnsigned\n\n\n16\n\n\n\n\n\n\nInt\n\n\nSigned\n\n\n16\n\n\n\n\n\n\nDword\n\n\nUnsigned\n\n\n32\n\n\n\n\n\n\nLongInt\n\n\nSigned\n\n\n32\n\n\n\n\n\n\nQword\n\n\nUnsigned\n\n\n64\n\n\n\n\n\n\nLongLongInt\n\n\nSigned\n\n\n64\n\n\n\n\n\n\nFloat\n\n\nSigned\n\n\n32\n\n\n\n\n\n\nDouble\n\n\nSigned\n\n\n64\n\n\n\n\n\n\nBinary\n\n\nNA\n\n\n8\n\n\n\n\n\n\n\n\nHexViewer: Toggle Endiannes (Big|Little)\n\ue157\n\n\nToggles the parsing of bytes to big or little endian when showing unit types in Hex Inspector.\n\n\nHexViewer: Set Bits Per Group\n\ue157\n\n\nAllows selection from the quick panel the grouping of bytes by 8, 16, 32, 64, and 128 bits.  This will reload the file with this formatting.  All edits will be lost, so export your changes before you do this.\n\n\nHexViewer: Set Bytes Per Line\n\ue157\n\n\nAllows selection from the quick panel the number of bytes to be shown on a line (allowed options are defined in \nvalid_bytes_per_line\n).\n\n\nHexViewer: Go to Offset\n\ue157\n\n\nMoves the cursor to the given offset (address).  Input is received through the input panel.\n\n\nHexViewer: Show Hex Edit Panel\n\ue157\n\n\nInvoking this command will take the currently selected bytes on a line and display them in an input panel.  They can then be modified and submitted to replace the original bytes.  Strings can also be used by using the \ns:\n prefix followed by the equivalent ASCII characters that are to replace the selected bytes.\n\n\nHexViewer: Discard All Edits\n\ue157\n\n\nIf at any time you would like to discard all of the changes you have currently made to the hex view, you can invoke this command and a clean hex view will be reloaded.\n\n\nHexViewer: Export Bin\n\ue157\n\n\nExports the current hex view to a binary file.\n\n\nHexViewer: Run Checksum\n\ue157\n\n\nBy default, it opens up a quick panel with all available hashes that can be used as a checksum.  When an algorithm is selected, it is used to retrieve the checksum for the current file in hex view mode.\n\n\nHexViewer: Generate Hash\n\ue157\n\n\nShows a quick panel allowing you to select the desired hash, and then shows an input panel that allows you to specify the string to be hashed. A panel is then displayed with your generated hash according to the selected specifications.\n\n\nHexViewer: Generate Hash from Selection\n\ue157\n\n\nAllows you to generate hashes from your current selection(s).  Multi-select regions' content will be combined and evaluated together.  If a region contains newlines, they will be hashed as well.\n\n\nHexViewer: Abort (Hex Conversion|Export|Checksum)\n\ue157\n\n\nAbort the given action.\n\n\nHexViewer: Open in External Viewer\n\ue157\n\n\nOpens the current binary file in an external hex editor.\n\n\nConfigurable settings\n\ue157\n\n\nSettings are configurable in the \nhex_viewer.sublime-settings\n file.\n\n\ngroup_bytes_by_bits\n\ue157\n\n\nGroups together the bytes by the number of bits.  Valid numbers are must be divisible by bytes and currently go up to 128 bits.\n\n\n    \n// Group bytes together by bits\n\n    \n// Valid Settings (8|16|32|64|128)\n\n    \n\"group_bytes_by_bits\"\n \n:\n \n16\n,\n\n\n\n\n\nvalid_bytes_per_line\n\ue157\n\n\nSets the number of valid bytes that will be allowed for the \nvalid_bytes_per_line\n.  Keep in mind though that just be because a value is deemed valid here, there are still some restriction that are covered in \nbytes_per_line\n.\n\n\n    \n// These are the valid bytes per line options\n\n    \n\"valid_bytes_per_line\"\n \n:\n \n[\n8\n,\n \n10\n,\n \n16\n,\n \n24\n,\n \n32\n,\n \n48\n,\n \n64\n,\n \n128\n,\n \n256\n,\n \n512\n],\n\n\n\n\n\nbytes_per_line\n\ue157\n\n\nNumber of bytes that will be shown on a line.  Can be any value found in \nvalid_bytes_per_line\n.  Even if the value is valid, there are some things to be aware of. HexViewer will default to a more reasonable value if the following does not hold true \nbytes_per_line / (group_bytes_by_bits / 8) == 0\n; if this does not hold true, there will be an adjustment made to the final number of bytes per line.\n\n\n    \n// Number of 8 bit bytes per line.\n\n    \n// See \"valid_bytes_per_line\" for valid options\n\n    \n\"bytes_per_line\"\n \n:\n \n24\n,\n\n\n\n\n\nuse_lowercase_hex\n\ue157\n\n\nControls whether hex values are displayed with lowercase or uppercase characters.\n\n\n    \n// Use lowercase hex values.\n\n    \n\"use_lowercase_hex\"\n:\n \ntrue\n,\n\n\n\n\n\ncustom_font\n\ue157\n\n\nSets the font used in a HexViewer view.  It is strongly recommended to set this to a monospaced font if your default font is not monospaced.\n\n\n    \n// Use None to use the current Sublime Text font.\n\n    \n\"custom_font\"\n \n:\n \n\"none\"\n,\n\n\n\n\n\ncustom_font_size\n\ue157\n\n\nSets the font size to be used in a HexViewer view.\n\n\n    \n// Use zero to use the current Sublime Text font size.\n\n    \n\"custom_font_size\"\n \n:\n \n0\n,\n\n\n\n\n\ninspector\n\ue157\n\n\nSets whether the Hex Inspector panel is enabled.  To have the Hex Inspector panel auto-open when a HexViewer view loads, see \ninspector_auto_show\n.\n\n\n    \n// Show inspector panel\n\n    \n\"inspector\"\n \n:\n \ntrue\n,\n\n\n\n\n\ninspector_endian\n\ue157\n\n\nSets the endianness of the displayed values in the inspector.  The string value of \nbig\n and \nlittle\n can be used.\n\n\n    \n// endian? (big|little)\n\n    \n\"inspector_endian\"\n \n:\n \n\"big\"\n,\n\n\n\n\n\ninspector_auto_show\n\ue157\n\n\nSets whether the Hex Inspector panel will auto-show on HexViewer view load.  If this is disabled, the Hex Inspector panel can still be shown manually when desired.\n\n\n    \n// Show inspector panel on hex view load and hide on hex view hide\n\n    \n\"inspector_auto_show\"\n \n:\n \ntrue\n,\n\n\n\n\n\ninspector_integer_format\n\ue157\n\n\nControls the text format for integer output in the inspector panel.  Uses standard python string formatting.\n\n\n   \n// Inspector format strings: ints and unsigned ints\n\n    \n\"inspector_integer_format\"\n:\n \n\"%-12s:  %-22d\"\n,\n\n\n\n\n\ninspector_float_format\n\ue157\n\n\nControls the text format for float output in the inspector panel.  Uses standard python string formatting.\n\n\n    \n// Inspector format strings: floating point decimals\n\n    \n\"inspector_float_format\"\n:\n \n\"%-12s:  %-22e\"\n,\n\n\n\n\n\ninspector_double_format\n\ue157\n\n\nControls the text format for double output in the inspector panel.  Uses standard python string formatting.\n\n\n    \n// Inspector format strings: double floating point decimal strings\n\n    \n\"inspector_double_format\"\n:\n \n\"%-12s:  %-22e\"\n,\n\n\n\n\n\ninspector_missing/bad_format\n\ue157\n\n\nControls the text format for missing/bad output in the inspector panel.  Uses standard python string formatting.\n\n\n    \n// Inspector format strings: \"NAN\" and not enough bytes to show numbers \"--\"\n\n    \n\"inspector_missing/bad_format\"\n:\n \n\"%-12s:  %-22s\"\n,\n\n\n\n\n\ninspector_binary_format\n\ue157\n\n\nControls the text format for binary output in the inspector panel.  Uses standard python string formatting.\n\n\n    \n// Binary number formatting\n\n    \n\"inspector_binary_format\"\n:\n \n\"%-12s:  %-22s\"\n\n\n\n\n\nenable_fake_hex_file\n\ue157\n\n\nWhen loading a file that is a HexViewer visual representation of a binary file, and the syntax is set to HexViewer's custom syntax, HexViewer will enable basic byte highlight features, Hex Inspector panel etc.\n\n\n    \n// Treat files in hex syntax with proper format\n\n    \n// (usually .hex files; saved versions of hex output)\n\n    \n// as real hex views.  The following functionality will be omitted:\n\n    \n// hex toggle, editing, writing to file,\n\n    \n// and dynamic changing of bits and bytes functionality.\n\n    \n// Address searching, Hex inspector, etc. should work fine.\n\n    \n\"enable_fake_hex_file\"\n:\n \ntrue\n,\n\n\n\n\n\nhighlight_max_bytes\n\ue157\n\n\nSets the max number of allowed bytes that HexViewer will highlight when selected.  This is a setting that limits the highlight for the sake of performance.  Keep this set to a reasonable value.\n\n\n    \n// Approximate max byte selection.\n\n    \n// The highlighter will highlight individual selections until\n\n    \n// the max number of bytes is found.  The selection containing\n\n    \n// the maximum byte will still be finished even if it has more\n\n    \n// bytes than the max.\n\n    \n\"highlight_max_bytes\"\n \n:\n \n1000\n,\n\n\n\n\n\nprompt_on_file_too_big\n\ue157\n\n\nPrompts the user with a dialog that gives the user the option to bypass the default action.  By default HexViewer cancels rendering a hex view if the file is too big; or, if an external viewer is configured, HexViewer will open the binary file in the configured external viewer.  This option gives the user the ability to conditionally override the default action and render the hex viewer tab despite file size being too large.\n\n\n    \n// If the file is too large (as defined in the settings file via 'max_file_size_kb'),\n\n    \n// prompt the user with a dialog asking whether they would like to open the file internally anyways\n\n    \n// or use the default action (open in external viewer defined in 'external viewer' or terminate action\n\n    \n// if 'external_viewer' is not set or invalid).\n\n    \n\"prompt_on_file_too_big\"\n:\n \nfalse\n,\n\n\n\n\n\nhighlight_throttle\n\ue157\n\n\nSets whether \nhighlight_max_bytes\n will be used.  This allows a user to not limit the number of highlighted bytes.  It is not recommended to use this for performances sake.\n\n\n    \n//Enable highlight throttling\n\n    \n\"highlight_throttle\"\n \n:\n \nfalse\n,\n\n\n\n\n\nhighlight_scope\n\ue157\n\n\nDefine the highlight color when a byte or ASCII char is selected.  Colors must be a scope found in your theme file, if not, the color will be the default font color.\n\n\n    \n// Scope? (Defined in theme files.)\n\n    \n// Examples: (keyword|string|number)\n\n    \n\"highlight_scope\"\n \n:\n \n\"string\"\n,\n\n\n\n\n\nhighlight_scope\n\ue157\n\n\nDefine the highlight color for bytes that have been edited.  Colors must be a scope found in your theme file, if not, the color will be the default font color.\n\n\n    \n\"highlight_edit_scope\"\n:\n \n\"keyword\"\n,\n\n\n\n\n\nhighlight_icon\n\ue157\n\n\nSets a gutter icon for highlighted bytes.  Default is set to the string \nnone\n to hide the icon.  This can be changed to either \ndot\n, \ncircle\n, \nbookmark\n, \ncross\n, or \nnone\n.\n\n\n    \n// Icon? (dot|circle|bookmark|cross|none)\n\n    \n\"highlight_icon\"\n \n:\n \n\"none\"\n,\n\n\n\n\n\nhighlight_edit_icon\n\ue157\n\n\nSets a gutter icon for edited bytes.  Default is set to the string \nnone\n to hide the icon.  This can be changed to either \ndot\n, \ncircle\n, \nbookmark\n, \ncross\n, \nnone\n.\n\n\n    \n\"highlight_edit_icon\"\n \n:\n \n\"none\"\n,\n\n\n\n\n\nhighlight_style\n\ue157\n\n\nSets the highlight style for highlighted bytes.  Can be \nsolid\n, \noutline\n, \nunderline\n, or \nnone\n.\n\n\n    \n// Style? (solid|outline|underline|none)\n\n    \n\"highlight_style\"\n \n:\n \n\"solid\"\n,\n\n\n\n\n\nhighlight_edit_style\n\ue157\n\n\nSets the highlight style for edited bytes.  Can be \nsolid\n, \noutline\n, \nunderline\n, or \nnone\n.\n\n\n    \n\"highlight_edit_style\"\n \n:\n \n\"underline\"\n,\n\n\n\n\n\nmax_file_size_kb\n\ue157\n\n\nSets a limit for how big of a binary file HexViewer will try and convert to a HexView.  Size is in Kilobytes.\n\n\n    \n// Maximum allowed byte size that HexViewer will parse\n\n    \n\"max_file_size_kb\"\n:\n \n50000.0\n,\n\n\n\n\n\nexternal_viewer\n\ue157\n\n\nSometimes it may be desired to open a hex view in an external editor.  Due to the nature of the Sublime Text API, HexViewer's options and speed can be limited, so it can be advantageous to open a file in an external hex editor when performing certain actions or dealing with very large files.  \nexternal_viewer\n allows the configuring of the external hex editor.  \nexternal_viewer\n is a dictionary containing to parameters.  \nviewer\n, which is an absolute path to the the external hex editor.  \nargs\n are the arguments that will be passed to the external editor; it is an array of string arguments.  You can use \n${FILE}\n has a place holder for the file path that will be sent to the editor.  HexViewer will insert the actual file path in the place of \n${FILE}\n.\n\n\n    \n// External Hex Viewer if max size is exceeded.\n\n    \n// Viewer should be the absolute path.\n\n    \n// Args is an array of command line arguments. Use ${FILE} for the file path.\n\n    \n\"external_viewer\"\n:\n \n{\n\n        \n\"viewer\"\n:\n \n\"\"\n,\n\n        \n\"args\"\n:\n \n[\n\"${FILE}\"\n]\n\n    \n},\n\n\n\n\n\nhash_algorithm\n\ue157\n\n\nThe default checksum algorithm to use when creating a hash or checksum (not all values listed below will be found on every platform and system).\n\n\n    \n// Checksum algorithm default? (the default is what is applied to a file when saving)\n\n    \n// (mdc2|md4|md5|sha|sha1|sha224|sha256|sha384|sha512|ripemd160|crc32|adler32)\n\n    \n\"hash_algorithm\"\n \n:\n \n\"md5\"\n,\n\n\n\n\n\nchecksum_on_save\n\ue157\n\n\nControls whether HexViewer will checksum the binary file on save/export.\n\n\n    \n// Enable checksum on save\n\n    \n\"checksum_on_save\"\n \n:\n \ntrue\n,\n\n\n\n\n\nauto_open\n\ue157\n\n\nSets whether HexViewer should auto detect binary files and convert them to HexViewer views.  When enabled, HexViewer will detect when a view is set to the \nHexidecimal\n syntax, or if the file name matches the \nauto_open_patterns\n found below.\n\n\n    \n// Auto open binary files in hex viewer\n\n    \n// Detects if view has encoding set to 'Hexidecimal'.\n\n    \n// Additionally it can use 'auto_open_patterns' below.\n\n    \n\"auto_open\"\n \n:\n \nfalse\n,\n\n\n\n\n\nauto_open_patterns\n\ue157\n\n\nWhen \nauto_open\n is enabled, HexViewer will use the following list of file patterns to detect binary files for auto conversion.\n\n\n    \n// Auto open patterns to open in hex viewer\n\n    \n\"auto_open_patterns\"\n \n:\n \n[\n\"*.bin\"\n,\n \n\"*.pyc\"\n],\n\n\n\n\n\ndisable_auto_open_hex_encoding\n\ue157\n\n\nSets whether \nauto_open\n will convert views with the \nHexidecimal\n syntax.\n\n\n    \n// Disable auto open based on 'Hexidecimal' encoding\n\n    \n\"disable_auto_open_hex_encoding\"\n:\n \nfalse\n,\n\n\n\n\n\nuse_sub_notify\n\ue157\n\n\nEnables use of \nSubNotify\n notifications.\n\n\n    \n// Use sub notify if available\n\n    \n\"use_sub_notify\"\n:\n \ntrue\n,",
+            "title": "User Guide"
+        },
+        {
+            "location": "/#user-guide",
+            "text": "",
+            "title": "User Guide"
+        },
+        {
+            "location": "/#overview",
+            "text": "Hex Viewer is a plugin for Sublime Text that allows the toggling of a file into a hex viewing mode.  Hex Viewer also supports hex editing.",
+            "title": "Overview"
+        },
+        {
+            "location": "/#features",
+            "text": "View any file (that exist on disk) in a hex format showing both byte and ASCII representation.  Command to jump to a specific address.  In place editing of bytes or ASCII chars.  Highlight selected byte  and  ASCII code.  Inspection panel showing different integer representation at the cursor position.  Configurable display of byte grouping, bytes per line, endianness.  Export hex view to a binary file.  Get the checksum of a given file (various checksums are available).  Generate checksum/hash from input via panel or text selection.  Optionally auto convert binary to hex view.",
+            "title": "Features"
+        },
+        {
+            "location": "/#commands",
+            "text": "There are various commands available via the command palette or by key-bindings. Below outlines what the commands are and what they do.",
+            "title": "Commands"
+        },
+        {
+            "location": "/#hexviewer-toggle-hex-view",
+            "text": "Toggles file in or out of hex view.",
+            "title": "HexViewer: Toggle Hex View"
+        },
+        {
+            "location": "/#hexviewer-reload-hex-view",
+            "text": "Reloads the current hex view.  All edits will be lost.",
+            "title": "HexViewer: Reload Hex View"
+        },
+        {
+            "location": "/#hexviewer-show-hex-inspector",
+            "text": "Show the Hex Inspector panel.  The Hex Inspector is a panel which shows the current selected byte as different unit types.     Name  Signed  Bits      Byte  Unsigned  8    Short  Signed  8    Word  Unsigned  16    Int  Signed  16    Dword  Unsigned  32    LongInt  Signed  32    Qword  Unsigned  64    LongLongInt  Signed  64    Float  Signed  32    Double  Signed  64    Binary  NA  8",
+            "title": "HexViewer: Show Hex Inspector"
+        },
+        {
+            "location": "/#hexviewer-toggle-endiannes-biglittle",
+            "text": "Toggles the parsing of bytes to big or little endian when showing unit types in Hex Inspector.",
+            "title": "HexViewer: Toggle Endiannes (Big|Little)"
+        },
+        {
+            "location": "/#hexviewer-set-bits-per-group",
+            "text": "Allows selection from the quick panel the grouping of bytes by 8, 16, 32, 64, and 128 bits.  This will reload the file with this formatting.  All edits will be lost, so export your changes before you do this.",
+            "title": "HexViewer: Set Bits Per Group"
+        },
+        {
+            "location": "/#hexviewer-set-bytes-per-line",
+            "text": "Allows selection from the quick panel the number of bytes to be shown on a line (allowed options are defined in  valid_bytes_per_line ).",
+            "title": "HexViewer: Set Bytes Per Line"
+        },
+        {
+            "location": "/#hexviewer-go-to-offset",
+            "text": "Moves the cursor to the given offset (address).  Input is received through the input panel.",
+            "title": "HexViewer: Go to Offset"
+        },
+        {
+            "location": "/#hexviewer-show-hex-edit-panel",
+            "text": "Invoking this command will take the currently selected bytes on a line and display them in an input panel.  They can then be modified and submitted to replace the original bytes.  Strings can also be used by using the  s:  prefix followed by the equivalent ASCII characters that are to replace the selected bytes.",
+            "title": "HexViewer: Show Hex Edit Panel"
+        },
+        {
+            "location": "/#hexviewer-discard-all-edits",
+            "text": "If at any time you would like to discard all of the changes you have currently made to the hex view, you can invoke this command and a clean hex view will be reloaded.",
+            "title": "HexViewer: Discard All Edits"
+        },
+        {
+            "location": "/#hexviewer-export-bin",
+            "text": "Exports the current hex view to a binary file.",
+            "title": "HexViewer: Export Bin"
+        },
+        {
+            "location": "/#hexviewer-run-checksum",
+            "text": "By default, it opens up a quick panel with all available hashes that can be used as a checksum.  When an algorithm is selected, it is used to retrieve the checksum for the current file in hex view mode.",
+            "title": "HexViewer: Run Checksum"
+        },
+        {
+            "location": "/#hexviewer-generate-hash",
+            "text": "Shows a quick panel allowing you to select the desired hash, and then shows an input panel that allows you to specify the string to be hashed. A panel is then displayed with your generated hash according to the selected specifications.",
+            "title": "HexViewer: Generate Hash"
+        },
+        {
+            "location": "/#hexviewer-generate-hash-from-selection",
+            "text": "Allows you to generate hashes from your current selection(s).  Multi-select regions' content will be combined and evaluated together.  If a region contains newlines, they will be hashed as well.",
+            "title": "HexViewer: Generate Hash from Selection"
+        },
+        {
+            "location": "/#hexviewer-abort-hex-conversionexportchecksum",
+            "text": "Abort the given action.",
+            "title": "HexViewer: Abort (Hex Conversion|Export|Checksum)"
+        },
+        {
+            "location": "/#hexviewer-open-in-external-viewer",
+            "text": "Opens the current binary file in an external hex editor.",
+            "title": "HexViewer: Open in External Viewer"
+        },
+        {
+            "location": "/#configurable-settings",
+            "text": "Settings are configurable in the  hex_viewer.sublime-settings  file.",
+            "title": "Configurable settings"
+        },
+        {
+            "location": "/#group_bytes_by_bits",
+            "text": "Groups together the bytes by the number of bits.  Valid numbers are must be divisible by bytes and currently go up to 128 bits.       // Group bytes together by bits \n     // Valid Settings (8|16|32|64|128) \n     \"group_bytes_by_bits\"   :   16 ,",
+            "title": "group_bytes_by_bits"
+        },
+        {
+            "location": "/#valid_bytes_per_line",
+            "text": "Sets the number of valid bytes that will be allowed for the  valid_bytes_per_line .  Keep in mind though that just be because a value is deemed valid here, there are still some restriction that are covered in  bytes_per_line .       // These are the valid bytes per line options \n     \"valid_bytes_per_line\"   :   [ 8 ,   10 ,   16 ,   24 ,   32 ,   48 ,   64 ,   128 ,   256 ,   512 ],",
+            "title": "valid_bytes_per_line"
+        },
+        {
+            "location": "/#bytes_per_line",
+            "text": "Number of bytes that will be shown on a line.  Can be any value found in  valid_bytes_per_line .  Even if the value is valid, there are some things to be aware of. HexViewer will default to a more reasonable value if the following does not hold true  bytes_per_line / (group_bytes_by_bits / 8) == 0 ; if this does not hold true, there will be an adjustment made to the final number of bytes per line.       // Number of 8 bit bytes per line. \n     // See \"valid_bytes_per_line\" for valid options \n     \"bytes_per_line\"   :   24 ,",
+            "title": "bytes_per_line"
+        },
+        {
+            "location": "/#use_lowercase_hex",
+            "text": "Controls whether hex values are displayed with lowercase or uppercase characters.       // Use lowercase hex values. \n     \"use_lowercase_hex\" :   true ,",
+            "title": "use_lowercase_hex"
+        },
+        {
+            "location": "/#custom_font",
+            "text": "Sets the font used in a HexViewer view.  It is strongly recommended to set this to a monospaced font if your default font is not monospaced.       // Use None to use the current Sublime Text font. \n     \"custom_font\"   :   \"none\" ,",
+            "title": "custom_font"
+        },
+        {
+            "location": "/#custom_font_size",
+            "text": "Sets the font size to be used in a HexViewer view.       // Use zero to use the current Sublime Text font size. \n     \"custom_font_size\"   :   0 ,",
+            "title": "custom_font_size"
+        },
+        {
+            "location": "/#inspector",
+            "text": "Sets whether the Hex Inspector panel is enabled.  To have the Hex Inspector panel auto-open when a HexViewer view loads, see  inspector_auto_show .       // Show inspector panel \n     \"inspector\"   :   true ,",
+            "title": "inspector"
+        },
+        {
+            "location": "/#inspector_endian",
+            "text": "Sets the endianness of the displayed values in the inspector.  The string value of  big  and  little  can be used.       // endian? (big|little) \n     \"inspector_endian\"   :   \"big\" ,",
+            "title": "inspector_endian"
+        },
+        {
+            "location": "/#inspector_auto_show",
+            "text": "Sets whether the Hex Inspector panel will auto-show on HexViewer view load.  If this is disabled, the Hex Inspector panel can still be shown manually when desired.       // Show inspector panel on hex view load and hide on hex view hide \n     \"inspector_auto_show\"   :   true ,",
+            "title": "inspector_auto_show"
+        },
+        {
+            "location": "/#inspector_integer_format",
+            "text": "Controls the text format for integer output in the inspector panel.  Uses standard python string formatting.      // Inspector format strings: ints and unsigned ints \n     \"inspector_integer_format\" :   \"%-12s:  %-22d\" ,",
+            "title": "inspector_integer_format"
+        },
+        {
+            "location": "/#inspector_float_format",
+            "text": "Controls the text format for float output in the inspector panel.  Uses standard python string formatting.       // Inspector format strings: floating point decimals \n     \"inspector_float_format\" :   \"%-12s:  %-22e\" ,",
+            "title": "inspector_float_format"
+        },
+        {
+            "location": "/#inspector_double_format",
+            "text": "Controls the text format for double output in the inspector panel.  Uses standard python string formatting.       // Inspector format strings: double floating point decimal strings \n     \"inspector_double_format\" :   \"%-12s:  %-22e\" ,",
+            "title": "inspector_double_format"
+        },
+        {
+            "location": "/#inspector_missingbad_format",
+            "text": "Controls the text format for missing/bad output in the inspector panel.  Uses standard python string formatting.       // Inspector format strings: \"NAN\" and not enough bytes to show numbers \"--\" \n     \"inspector_missing/bad_format\" :   \"%-12s:  %-22s\" ,",
+            "title": "inspector_missing/bad_format"
+        },
+        {
+            "location": "/#inspector_binary_format",
+            "text": "Controls the text format for binary output in the inspector panel.  Uses standard python string formatting.       // Binary number formatting \n     \"inspector_binary_format\" :   \"%-12s:  %-22s\"",
+            "title": "inspector_binary_format"
+        },
+        {
+            "location": "/#enable_fake_hex_file",
+            "text": "When loading a file that is a HexViewer visual representation of a binary file, and the syntax is set to HexViewer's custom syntax, HexViewer will enable basic byte highlight features, Hex Inspector panel etc.       // Treat files in hex syntax with proper format \n     // (usually .hex files; saved versions of hex output) \n     // as real hex views.  The following functionality will be omitted: \n     // hex toggle, editing, writing to file, \n     // and dynamic changing of bits and bytes functionality. \n     // Address searching, Hex inspector, etc. should work fine. \n     \"enable_fake_hex_file\" :   true ,",
+            "title": "enable_fake_hex_file"
+        },
+        {
+            "location": "/#highlight_max_bytes",
+            "text": "Sets the max number of allowed bytes that HexViewer will highlight when selected.  This is a setting that limits the highlight for the sake of performance.  Keep this set to a reasonable value.       // Approximate max byte selection. \n     // The highlighter will highlight individual selections until \n     // the max number of bytes is found.  The selection containing \n     // the maximum byte will still be finished even if it has more \n     // bytes than the max. \n     \"highlight_max_bytes\"   :   1000 ,",
+            "title": "highlight_max_bytes"
+        },
+        {
+            "location": "/#prompt_on_file_too_big",
+            "text": "Prompts the user with a dialog that gives the user the option to bypass the default action.  By default HexViewer cancels rendering a hex view if the file is too big; or, if an external viewer is configured, HexViewer will open the binary file in the configured external viewer.  This option gives the user the ability to conditionally override the default action and render the hex viewer tab despite file size being too large.       // If the file is too large (as defined in the settings file via 'max_file_size_kb'), \n     // prompt the user with a dialog asking whether they would like to open the file internally anyways \n     // or use the default action (open in external viewer defined in 'external viewer' or terminate action \n     // if 'external_viewer' is not set or invalid). \n     \"prompt_on_file_too_big\" :   false ,",
+            "title": "prompt_on_file_too_big"
+        },
+        {
+            "location": "/#highlight_throttle",
+            "text": "Sets whether  highlight_max_bytes  will be used.  This allows a user to not limit the number of highlighted bytes.  It is not recommended to use this for performances sake.       //Enable highlight throttling \n     \"highlight_throttle\"   :   false ,",
+            "title": "highlight_throttle"
+        },
+        {
+            "location": "/#highlight_scope",
+            "text": "Define the highlight color when a byte or ASCII char is selected.  Colors must be a scope found in your theme file, if not, the color will be the default font color.       // Scope? (Defined in theme files.) \n     // Examples: (keyword|string|number) \n     \"highlight_scope\"   :   \"string\" ,",
+            "title": "highlight_scope"
+        },
+        {
+            "location": "/#highlight_scope_1",
+            "text": "Define the highlight color for bytes that have been edited.  Colors must be a scope found in your theme file, if not, the color will be the default font color.       \"highlight_edit_scope\" :   \"keyword\" ,",
+            "title": "highlight_scope"
+        },
+        {
+            "location": "/#highlight_icon",
+            "text": "Sets a gutter icon for highlighted bytes.  Default is set to the string  none  to hide the icon.  This can be changed to either  dot ,  circle ,  bookmark ,  cross , or  none .       // Icon? (dot|circle|bookmark|cross|none) \n     \"highlight_icon\"   :   \"none\" ,",
+            "title": "highlight_icon"
+        },
+        {
+            "location": "/#highlight_edit_icon",
+            "text": "Sets a gutter icon for edited bytes.  Default is set to the string  none  to hide the icon.  This can be changed to either  dot ,  circle ,  bookmark ,  cross ,  none .       \"highlight_edit_icon\"   :   \"none\" ,",
+            "title": "highlight_edit_icon"
+        },
+        {
+            "location": "/#highlight_style",
+            "text": "Sets the highlight style for highlighted bytes.  Can be  solid ,  outline ,  underline , or  none .       // Style? (solid|outline|underline|none) \n     \"highlight_style\"   :   \"solid\" ,",
+            "title": "highlight_style"
+        },
+        {
+            "location": "/#highlight_edit_style",
+            "text": "Sets the highlight style for edited bytes.  Can be  solid ,  outline ,  underline , or  none .       \"highlight_edit_style\"   :   \"underline\" ,",
+            "title": "highlight_edit_style"
+        },
+        {
+            "location": "/#max_file_size_kb",
+            "text": "Sets a limit for how big of a binary file HexViewer will try and convert to a HexView.  Size is in Kilobytes.       // Maximum allowed byte size that HexViewer will parse \n     \"max_file_size_kb\" :   50000.0 ,",
+            "title": "max_file_size_kb"
+        },
+        {
+            "location": "/#external_viewer",
+            "text": "Sometimes it may be desired to open a hex view in an external editor.  Due to the nature of the Sublime Text API, HexViewer's options and speed can be limited, so it can be advantageous to open a file in an external hex editor when performing certain actions or dealing with very large files.   external_viewer  allows the configuring of the external hex editor.   external_viewer  is a dictionary containing to parameters.   viewer , which is an absolute path to the the external hex editor.   args  are the arguments that will be passed to the external editor; it is an array of string arguments.  You can use  ${FILE}  has a place holder for the file path that will be sent to the editor.  HexViewer will insert the actual file path in the place of  ${FILE} .       // External Hex Viewer if max size is exceeded. \n     // Viewer should be the absolute path. \n     // Args is an array of command line arguments. Use ${FILE} for the file path. \n     \"external_viewer\" :   { \n         \"viewer\" :   \"\" , \n         \"args\" :   [ \"${FILE}\" ] \n     },",
+            "title": "external_viewer"
+        },
+        {
+            "location": "/#hash_algorithm",
+            "text": "The default checksum algorithm to use when creating a hash or checksum (not all values listed below will be found on every platform and system).       // Checksum algorithm default? (the default is what is applied to a file when saving) \n     // (mdc2|md4|md5|sha|sha1|sha224|sha256|sha384|sha512|ripemd160|crc32|adler32) \n     \"hash_algorithm\"   :   \"md5\" ,",
+            "title": "hash_algorithm"
+        },
+        {
+            "location": "/#checksum_on_save",
+            "text": "Controls whether HexViewer will checksum the binary file on save/export.       // Enable checksum on save \n     \"checksum_on_save\"   :   true ,",
+            "title": "checksum_on_save"
+        },
+        {
+            "location": "/#auto_open",
+            "text": "Sets whether HexViewer should auto detect binary files and convert them to HexViewer views.  When enabled, HexViewer will detect when a view is set to the  Hexidecimal  syntax, or if the file name matches the  auto_open_patterns  found below.       // Auto open binary files in hex viewer \n     // Detects if view has encoding set to 'Hexidecimal'. \n     // Additionally it can use 'auto_open_patterns' below. \n     \"auto_open\"   :   false ,",
+            "title": "auto_open"
+        },
+        {
+            "location": "/#auto_open_patterns",
+            "text": "When  auto_open  is enabled, HexViewer will use the following list of file patterns to detect binary files for auto conversion.       // Auto open patterns to open in hex viewer \n     \"auto_open_patterns\"   :   [ \"*.bin\" ,   \"*.pyc\" ],",
+            "title": "auto_open_patterns"
+        },
+        {
+            "location": "/#disable_auto_open_hex_encoding",
+            "text": "Sets whether  auto_open  will convert views with the  Hexidecimal  syntax.       // Disable auto open based on 'Hexidecimal' encoding \n     \"disable_auto_open_hex_encoding\" :   false ,",
+            "title": "disable_auto_open_hex_encoding"
+        },
+        {
+            "location": "/#use_sub_notify",
+            "text": "Enables use of  SubNotify  notifications.       // Use sub notify if available \n     \"use_sub_notify\" :   true ,",
+            "title": "use_sub_notify"
+        },
+        {
+            "location": "/installation/",
+            "text": "Installation\n\ue157\n\n\nPackage Control\n\ue157\n\n\nThe recommended way to install HexViewer is via \nPackage Control\n.  Package Control will install the correct branch on your system and keep it up to date.\n\n\n\n\n\n\n\n\nEnsure Package Control is installed.  Instructions are found \nhere\n.\n\n\n\n\n\n\nIn Sublime Text, press \nCtrl\n\uff0b\nShift\n\uff0b\nP\n (Win, Linux) or \nCmd\n\uff0b\nShift\n\uff0b\nP\n (OSX) to bring up the quick panel and start typing \nPackage Control: Install Package\n.  Select the command and it will show a list of installable plugins.\n\n\n\n\n\n\nStart typing \nHexViewer\n; when you see it, select it.\n\n\n\n\n\n\nRestart to be sure everything is loaded proper.\n\n\n\n\n\n\nEnjoy!\n\n\n\n\n\n\nManual Installation\n\ue157\n\n\n\n\nWarning\n\n\nThis is not the recommended way to install HexViewer for the average user.  Installing this way \nwill not\n get automatically updated.\n\n\nIf you are forking for a pull request, you should \njust\n clone HexViewer and run Package Control's \nSatisfy Dependency\n command to get all the dependencies.\n\n\n\n\nFor those who want to install HexViewer without package control, here are the steps.  It is understood that some people, for what ever reason, will prefer manual install and may even have legitimate reasons to do so.  When going this route, you will have to keep all the packages updated yourself.\n\n\n\n\n\n\n\n\nDownload the latest releases of the following dependencies and unpack or git clone in the \nPackages\n folder as shown below:\n\n\n\n\nteddy_beer_maniac/sublime-text-dependency-markupsafe\n -> \nmarkupsafe\n\n\nteddy_beer_maniac/sublime-text-dependency-jinja2\n -> \npython-jinja2\n\n\npackagecontrol/pygments\n -> \npygments\n\n\nfacelessuser/sublime-markdown-popups\n -> \nmdpopups\n\n\nfacelessuser/sublime-markdown\n -> \npython-markdown\n\n\n\n\n\n\n\n\nDownload and unpack, or git clone, the latest HexViewer release and unpack as \nHexViewer\n:\n\n\n\n\nfacelessuser/HexViewer\n -> HexViewer\n\n\n\n\n\n\n\n\nCreate a folder under \nPackages\n called \n00-dependencies\n and under that folder create a file called \n00-dependencies.py\n:\n\n\nCopy the following code to \n00-dependencies.py\n (this code was taken from Package Control):\n\n\nimport\n \nsys\n\n\nimport\n \nos\n\n\nfrom\n \nos.path\n \nimport\n \ndirname\n\n\n\nif\n \nos\n.\nname\n \n==\n \n'nt'\n:\n\n    \nfrom\n \nctypes\n \nimport\n \nwindll\n,\n \ncreate_unicode_buffer\n\n\n\nimport\n \nsublime\n\n\n\n\nif\n \nsys\n.\nversion_info\n \n>=\n \n(\n3\n,):\n\n    \ndef\n \ndecode\n(\npath\n):\n\n        \nreturn\n \npath\n\n\n    \ndef\n \nencode\n(\npath\n):\n\n        \nreturn\n \npath\n\n\n    \nif\n \nos\n.\npath\n.\nbasename\n(\n__file__\n)\n \n==\n \n'sys_path.py'\n:\n\n        \npc_package_path\n \n=\n \ndirname\n(\ndirname\n(\n__file__\n))\n\n    \n# When loaded as a .sublime-package file, the filename ends up being\n\n    \n# Package Control.sublime-package/Package Control.package_control.sys_path\n\n    \nelse\n:\n\n        \npc_package_path\n \n=\n \ndirname\n(\n__file__\n)\n\n    \nst_version\n \n=\n \nu\n'3'\n\n\n\nelse\n:\n\n    \ndef\n \ndecode\n(\npath\n):\n\n        \nif\n \nnot\n \nisinstance\n(\npath\n,\n \nunicode\n):\n\n            \npath\n \n=\n \npath\n.\ndecode\n(\nsys\n.\ngetfilesystemencoding\n())\n\n        \nreturn\n \npath\n\n\n    \ndef\n \nencode\n(\npath\n):\n\n        \nif\n \nisinstance\n(\npath\n,\n \nunicode\n):\n\n            \npath\n \n=\n \npath\n.\nencode\n(\nsys\n.\ngetfilesystemencoding\n())\n\n        \nreturn\n \npath\n\n\n    \npc_package_path\n \n=\n \ndecode\n(\nos\n.\ngetcwd\n())\n\n    \nst_version\n \n=\n \nu\n'2'\n\n\n\n\nst_dir\n \n=\n \ndirname\n(\ndirname\n(\npc_package_path\n))\n\n\n\n\ndef\n \nadd\n(\npath\n,\n \nfirst\n=\nFalse\n):\n\n    \n\"\"\"\n\n\n    Adds an entry to the beginning of sys.path, working around the fact that\n\n\n    Python 2.6 can't import from non-ASCII paths on Windows.\n\n\n\n    :param path:\n\n\n        A unicode string of a folder, zip file or sublime-package file to\n\n\n        add to the path\n\n\n\n    :param first:\n\n\n        If the path should be added at the beginning\n\n\n    \"\"\"\n\n\n    \nif\n \nos\n.\nname\n \n==\n \n'nt'\n:\n\n        \n# Work around unicode path import issue on Windows with Python 2.6\n\n        \nbuf\n \n=\n \ncreate_unicode_buffer\n(\n512\n)\n\n        \nif\n \nwindll\n.\nkernel32\n.\nGetShortPathNameW\n(\npath\n,\n \nbuf\n,\n \nlen\n(\nbuf\n)):\n\n            \npath\n \n=\n \nbuf\n.\nvalue\n\n\n    \nenc_path\n \n=\n \nencode\n(\npath\n)\n\n\n    \nif\n \nos\n.\npath\n.\nexists\n(\nenc_path\n):\n\n        \nif\n \nfirst\n:\n\n            \ntry\n:\n\n                \nsys\n.\npath\n.\nremove\n(\nenc_path\n)\n\n            \nexcept\n \n(\nValueError\n):\n\n                \npass\n\n            \nsys\n.\npath\n.\ninsert\n(\n0\n,\n \nenc_path\n)\n\n        \nelif\n \nenc_path\n \nnot\n \nin\n \nsys\n.\npath\n:\n\n            \nsys\n.\npath\n.\nappend\n(\nenc_path\n)\n\n\n\n\ndef\n \nremove\n(\npath\n):\n\n    \n\"\"\"\n\n\n    Removes a path from sys.path if it is present\n\n\n\n    :param path:\n\n\n        A unicode string of a folder, zip file or sublime-package file\n\n\n    \"\"\"\n\n\n    \ntry\n:\n\n        \nsys\n.\npath\n.\nremove\n(\nencode\n(\npath\n))\n\n    \nexcept\n \n(\nValueError\n):\n\n        \npass\n\n\n    \nif\n \nos\n.\nname\n \n==\n \n'nt'\n:\n\n        \nbuf\n \n=\n \ncreate_unicode_buffer\n(\n512\n)\n\n        \nif\n \nwindll\n.\nkernel32\n.\nGetShortPathNameW\n(\npath\n,\n \nbuf\n,\n \nlen\n(\nbuf\n)):\n\n            \npath\n \n=\n \nbuf\n.\nvalue\n\n        \ntry\n:\n\n            \nsys\n.\npath\n.\nremove\n(\nencode\n(\npath\n))\n\n        \nexcept\n \n(\nValueError\n):\n\n            \npass\n\n\n\n\ndef\n \ngenerate_dependency_paths\n(\nname\n):\n\n    \n\"\"\"\n\n\n    Accepts a dependency name and generates a dict containing the three standard\n\n\n    import paths that are valid for the current machine.\n\n\n\n    :param name:\n\n\n        A unicode string name of the dependency\n\n\n\n    :return:\n\n\n        A dict with the following keys:\n\n\n         - 'ver'\n\n\n         - 'plat'\n\n\n         - 'arch'\n\n\n    \"\"\"\n\n\n    \npackages_dir\n \n=\n \nos\n.\npath\n.\njoin\n(\nst_dir\n,\n \nu\n'Packages'\n)\n\n    \ndependency_dir\n \n=\n \nos\n.\npath\n.\njoin\n(\npackages_dir\n,\n \nname\n)\n\n\n    \nver\n \n=\n \nu\n'st\n%s\n'\n \n%\n \nst_version\n\n    \nplat\n \n=\n \nsublime\n.\nplatform\n()\n\n    \narch\n \n=\n \nsublime\n.\narch\n()\n\n\n    \nreturn\n \n{\n\n        \n'all'\n:\n \nos\n.\npath\n.\njoin\n(\ndependency_dir\n,\n \n'all'\n),\n\n        \n'ver'\n:\n \nos\n.\npath\n.\njoin\n(\ndependency_dir\n,\n \nver\n),\n\n        \n'plat'\n:\n \nos\n.\npath\n.\njoin\n(\ndependency_dir\n,\n \nu\n'\n%s\n_\n%s\n'\n \n%\n \n(\nver\n,\n \nplat\n)),\n\n        \n'arch'\n:\n \nos\n.\npath\n.\njoin\n(\ndependency_dir\n,\n \nu\n'\n%s\n_\n%s\n_\n%s\n'\n \n%\n \n(\nver\n,\n \nplat\n,\n \narch\n))\n\n    \n}\n\n\n\n\ndef\n \nadd_dependency\n(\nname\n,\n \nfirst\n=\nFalse\n):\n\n    \n\"\"\"\n\n\n    Accepts a dependency name and automatically adds the appropriate path\n\n\n    to sys.path, if the dependency has a path for the current platform and\n\n\n    architecture.\n\n\n\n    :param name:\n\n\n        A unicode string name of the dependency\n\n\n\n    :param first:\n\n\n        If the path should be added to the beginning of the list\n\n\n    \"\"\"\n\n\n    \ndep_paths\n \n=\n \ngenerate_dependency_paths\n(\nname\n)\n\n\n    \nfor\n \npath\n \nin\n \ndep_paths\n.\nvalues\n():\n\n        \nif\n \nos\n.\npath\n.\nexists\n(\nencode\n(\npath\n)):\n\n            \nadd\n(\npath\n,\n \nfirst\n=\nfirst\n)\n\n\n\n\nadd_dependency\n(\n'pygments'\n)\n\n\nadd_dependency\n(\n'markupsafe'\n)\n\n\nadd_dependency\n(\n'python-markdown'\n)\n\n\nadd_dependency\n(\n'python-jinja2'\n)\n\n\nadd_dependency\n(\n'mdpopups'\n)\n\n\n\n\n\n\n\n\n\nRestart and enjoy.\n\n\n\n\n\n\nGit Cloning\n\ue157\n\n\n\n\n\n\nQuit Sublime Text.\n\n\n\n\n\n\nOpen a terminal and enter the following.  For dependencies, replace the URL with the appropriate URL, and the appropriate folder to check it out to:\n\n\ncd /path/to/Sublime Text 3/Packages\ngit clone https://github.com/facelessuser/HexViewer.git HexViewer\n\n\n\n\n\n\n\n\nRestart Sublime Text.",
+            "title": "Installation"
+        },
+        {
+            "location": "/installation/#installation",
+            "text": "",
+            "title": "Installation"
+        },
+        {
+            "location": "/installation/#package-control",
+            "text": "The recommended way to install HexViewer is via  Package Control .  Package Control will install the correct branch on your system and keep it up to date.     Ensure Package Control is installed.  Instructions are found  here .    In Sublime Text, press  Ctrl \uff0b Shift \uff0b P  (Win, Linux) or  Cmd \uff0b Shift \uff0b P  (OSX) to bring up the quick panel and start typing  Package Control: Install Package .  Select the command and it will show a list of installable plugins.    Start typing  HexViewer ; when you see it, select it.    Restart to be sure everything is loaded proper.    Enjoy!",
+            "title": "Package Control"
+        },
+        {
+            "location": "/installation/#manual-installation",
+            "text": "Warning  This is not the recommended way to install HexViewer for the average user.  Installing this way  will not  get automatically updated.  If you are forking for a pull request, you should  just  clone HexViewer and run Package Control's  Satisfy Dependency  command to get all the dependencies.   For those who want to install HexViewer without package control, here are the steps.  It is understood that some people, for what ever reason, will prefer manual install and may even have legitimate reasons to do so.  When going this route, you will have to keep all the packages updated yourself.     Download the latest releases of the following dependencies and unpack or git clone in the  Packages  folder as shown below:   teddy_beer_maniac/sublime-text-dependency-markupsafe  ->  markupsafe  teddy_beer_maniac/sublime-text-dependency-jinja2  ->  python-jinja2  packagecontrol/pygments  ->  pygments  facelessuser/sublime-markdown-popups  ->  mdpopups  facelessuser/sublime-markdown  ->  python-markdown     Download and unpack, or git clone, the latest HexViewer release and unpack as  HexViewer :   facelessuser/HexViewer  -> HexViewer     Create a folder under  Packages  called  00-dependencies  and under that folder create a file called  00-dependencies.py :  Copy the following code to  00-dependencies.py  (this code was taken from Package Control):  import   sys  import   os  from   os.path   import   dirname  if   os . name   ==   'nt' : \n     from   ctypes   import   windll ,   create_unicode_buffer  import   sublime  if   sys . version_info   >=   ( 3 ,): \n     def   decode ( path ): \n         return   path \n\n     def   encode ( path ): \n         return   path \n\n     if   os . path . basename ( __file__ )   ==   'sys_path.py' : \n         pc_package_path   =   dirname ( dirname ( __file__ )) \n     # When loaded as a .sublime-package file, the filename ends up being \n     # Package Control.sublime-package/Package Control.package_control.sys_path \n     else : \n         pc_package_path   =   dirname ( __file__ ) \n     st_version   =   u '3'  else : \n     def   decode ( path ): \n         if   not   isinstance ( path ,   unicode ): \n             path   =   path . decode ( sys . getfilesystemencoding ()) \n         return   path \n\n     def   encode ( path ): \n         if   isinstance ( path ,   unicode ): \n             path   =   path . encode ( sys . getfilesystemencoding ()) \n         return   path \n\n     pc_package_path   =   decode ( os . getcwd ()) \n     st_version   =   u '2'  st_dir   =   dirname ( dirname ( pc_package_path ))  def   add ( path ,   first = False ): \n     \"\"\"      Adds an entry to the beginning of sys.path, working around the fact that      Python 2.6 can't import from non-ASCII paths on Windows.      :param path:          A unicode string of a folder, zip file or sublime-package file to          add to the path      :param first:          If the path should be added at the beginning      \"\"\" \n\n     if   os . name   ==   'nt' : \n         # Work around unicode path import issue on Windows with Python 2.6 \n         buf   =   create_unicode_buffer ( 512 ) \n         if   windll . kernel32 . GetShortPathNameW ( path ,   buf ,   len ( buf )): \n             path   =   buf . value \n\n     enc_path   =   encode ( path ) \n\n     if   os . path . exists ( enc_path ): \n         if   first : \n             try : \n                 sys . path . remove ( enc_path ) \n             except   ( ValueError ): \n                 pass \n             sys . path . insert ( 0 ,   enc_path ) \n         elif   enc_path   not   in   sys . path : \n             sys . path . append ( enc_path )  def   remove ( path ): \n     \"\"\"      Removes a path from sys.path if it is present      :param path:          A unicode string of a folder, zip file or sublime-package file      \"\"\" \n\n     try : \n         sys . path . remove ( encode ( path )) \n     except   ( ValueError ): \n         pass \n\n     if   os . name   ==   'nt' : \n         buf   =   create_unicode_buffer ( 512 ) \n         if   windll . kernel32 . GetShortPathNameW ( path ,   buf ,   len ( buf )): \n             path   =   buf . value \n         try : \n             sys . path . remove ( encode ( path )) \n         except   ( ValueError ): \n             pass  def   generate_dependency_paths ( name ): \n     \"\"\"      Accepts a dependency name and generates a dict containing the three standard      import paths that are valid for the current machine.      :param name:          A unicode string name of the dependency      :return:          A dict with the following keys:           - 'ver'           - 'plat'           - 'arch'      \"\"\" \n\n     packages_dir   =   os . path . join ( st_dir ,   u 'Packages' ) \n     dependency_dir   =   os . path . join ( packages_dir ,   name ) \n\n     ver   =   u 'st %s '   %   st_version \n     plat   =   sublime . platform () \n     arch   =   sublime . arch () \n\n     return   { \n         'all' :   os . path . join ( dependency_dir ,   'all' ), \n         'ver' :   os . path . join ( dependency_dir ,   ver ), \n         'plat' :   os . path . join ( dependency_dir ,   u ' %s _ %s '   %   ( ver ,   plat )), \n         'arch' :   os . path . join ( dependency_dir ,   u ' %s _ %s _ %s '   %   ( ver ,   plat ,   arch )) \n     }  def   add_dependency ( name ,   first = False ): \n     \"\"\"      Accepts a dependency name and automatically adds the appropriate path      to sys.path, if the dependency has a path for the current platform and      architecture.      :param name:          A unicode string name of the dependency      :param first:          If the path should be added to the beginning of the list      \"\"\" \n\n     dep_paths   =   generate_dependency_paths ( name ) \n\n     for   path   in   dep_paths . values (): \n         if   os . path . exists ( encode ( path )): \n             add ( path ,   first = first )  add_dependency ( 'pygments' )  add_dependency ( 'markupsafe' )  add_dependency ( 'python-markdown' )  add_dependency ( 'python-jinja2' )  add_dependency ( 'mdpopups' )     Restart and enjoy.",
+            "title": "Manual Installation"
+        },
+        {
+            "location": "/installation/#git-cloning",
+            "text": "Quit Sublime Text.    Open a terminal and enter the following.  For dependencies, replace the URL with the appropriate URL, and the appropriate folder to check it out to:  cd /path/to/Sublime Text 3/Packages\ngit clone https://github.com/facelessuser/HexViewer.git HexViewer    Restart Sublime Text.",
+            "title": "Git Cloning"
+        },
+        {
+            "location": "/contributing/",
+            "text": "Contributing & Support\n\ue157\n\n\nOverview\n\ue157\n\n\n\n\n\n\n\n\nSublime\u00a0Versions\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nST2\n\n\nSupported on a separate branch, but not actively.  Any further fixes or enhancements must come from the community.  Issues for versions less than \nST3\n will not be addressed moving forward by me.  Pull requests are welcome for back-porting features, enhancements, or fixes to the old branch, but the content of the pull \nmust\n already exist on the main, actively developed branch.  I will not allow an older branch to exceed the main branch in regards to functionality.\n\n\n\n\n\n\nST3\n\n\nFully supported and actively maintained.\n\n\n\n\n\n\n\n\nContribution from the community is encouraged and can be done in a variety of ways:\n\n\n\n\nBug reports.\n\n\nReviewing code.\n\n\nCode patches via pull requests.\n\n\nDocumentation improvements via pull requests.\n\n\n\n\nBug Reports\n\ue157\n\n\n\n\n\n\nPlease \nread the documentation\n and \nsearch the issue tracker\n to try to find the answer to your question \nbefore\n posting an issue.\n\n\n\n\n\n\nWhen creating an issue on the repository, please provide as much info as possible:\n\n\n\n\nProvide environment information by running \nPreferences->Package Settings->HexViewer->Support Info\n.  The information will be copied to the clipboard; paste the info in issue.\n\n\nErrors in console.\n\n\nDetailed description of the problem.\n\n\nExamples for reproducing the error.  You can post pictures, but if specific text or code is required to reproduce the issue, please provide the text in a plain text format as well for easy copy/paste.\n\n\n\n\nThe more info provided the greater the chance someone will take the time to answer, implement, or fix the issue.\n\n\n\n\n\n\nBe prepared to answer questions and provide additional information if required.  Issues in which the creator refuses to respond to follow up questions will be marked as stale and closed.\n\n\n\n\n\n\nReviewing Code\n\ue157\n\n\nTake part in reviewing pull requests and/or reviewing direct commits.  Make suggestions to improve the code and discuss solutions to overcome weakness in the algorithm.\n\n\nPull Requests\n\ue157\n\n\nPull requests are welcome, and if you plan on contributing directly to the code, there are a couple of things to be mindful of.\n\n\n\n\n\n\nPlease describe the change in as much detail as possible so I can understand what is being added or modified.\n\n\n\n\n\n\nIf you are solving a bug that does not already have an issue, please describe the bug in detail and provide info on how to reproduce if applicable (this is good for me and others to reference later when verifying the issue has been resolved).\n\n\n\n\n\n\nPlease reference and link related open bugs or feature requests in this pull if applicable.\n\n\n\n\n\n\nMake sure you've documented or updated the existing documentation if introducing a new feature or modifying the behavior of an existing feature that a user needs to be aware of.  I will not accept new features or changes to existing features if you have not provided documentation describing the feature.\n\n\n\n\n\n\nContinuous integration tests on are run on all pull requests and commits via Travis CI.  When making a pull request, the tests will automatically be run, and the request must pass to be accepted.  You can (and should) run these tests before pull requesting.  If it is not possible to run these tests locally, they will be run when the pull request is made, but it is strongly suggested that requesters make an effort to verify before requesting to allow for a quick, smooth merge.\n\n\nRunning Validation Tests\n\ue157\n\n\n\n\nTip\n\n\nIf you are running Sublime on a OSX or Linux/Unix system, you run all tests by by running the shell script (assuming you have installed your environment fulfills all requirements below):\n\n\nchmod +x run_tests.sh\n./run_tests.sh\n\n\n\n\n\n\nThere are a couple of dependencies that must be present before running the tests.\n\n\n\n\n\n\nAs \nST3\n is the only current, actively supported version, Python 3 must be used to validate the tests.\n\n\n\n\n\n\nUnit tests are run with pytest (\npytest-dev/pytest\n).  You can install pytest via:\n\n\npip install pytest\n\n\n\n\nThe tests should be run from the root folder of the plugin by using the following command:\n\n\npy.test .\n\n\n\n\n\n\n\n\nLinting is performed on the entire project with the following modules:\n\n\n\n\npycqa/flake8\n\n\npycqa/flake8-docstrings\n\n\nebeweber/flake8-mutable\n\n\ngforcada/flake8-builtins\n\n\npycqa/pep8-naming\n\n\n\n\nThese can be installed via:\n\n\npip install flake8\npip install flake8-docstrings\npip install flake8-mutable\npip install flake8-builtins\npip install pep8-naming\n\n\n\n\nLinting is performed with the following command:\n\n\nflake8 .\n\n\n\n\n\n\n\n\nDocumentation Improvements\n\ue157\n\n\nA ton of time has been spent not only creating and supporting this plugin, but also spent making this documentation.  If you feel it is still lacking, show your appreciation for the plugin by helping to improve the documentation.  Help with documentation is always appreciated and can be done via pull requests.  There shouldn't be any need to run validation tests if only updating documentation.\n\n\nYou don't have to render the docs locally before pull requesting, but if you wish to, I currently use a combination of \nmkdocs/mkdocs\n, the \nsquidfunk/mkdocs-material\n, and \nfacelessuser/pymdown-extensions\n to render the docs.  You can preview the docs if you install these two packages.  The command for previewing the docs is \nmkdocs serve\n from the root directory. You can then view the documents at \nlocalhost:8000\n.",
+            "title": "Contributing &amp; Support"
+        },
+        {
+            "location": "/contributing/#contributing--support",
+            "text": "",
+            "title": "Contributing &amp; Support"
+        },
+        {
+            "location": "/contributing/#overview",
+            "text": "Sublime\u00a0Versions  Description      ST2  Supported on a separate branch, but not actively.  Any further fixes or enhancements must come from the community.  Issues for versions less than  ST3  will not be addressed moving forward by me.  Pull requests are welcome for back-porting features, enhancements, or fixes to the old branch, but the content of the pull  must  already exist on the main, actively developed branch.  I will not allow an older branch to exceed the main branch in regards to functionality.    ST3  Fully supported and actively maintained.     Contribution from the community is encouraged and can be done in a variety of ways:   Bug reports.  Reviewing code.  Code patches via pull requests.  Documentation improvements via pull requests.",
+            "title": "Overview"
+        },
+        {
+            "location": "/contributing/#bug-reports",
+            "text": "Please  read the documentation  and  search the issue tracker  to try to find the answer to your question  before  posting an issue.    When creating an issue on the repository, please provide as much info as possible:   Provide environment information by running  Preferences->Package Settings->HexViewer->Support Info .  The information will be copied to the clipboard; paste the info in issue.  Errors in console.  Detailed description of the problem.  Examples for reproducing the error.  You can post pictures, but if specific text or code is required to reproduce the issue, please provide the text in a plain text format as well for easy copy/paste.   The more info provided the greater the chance someone will take the time to answer, implement, or fix the issue.    Be prepared to answer questions and provide additional information if required.  Issues in which the creator refuses to respond to follow up questions will be marked as stale and closed.",
+            "title": "Bug Reports"
+        },
+        {
+            "location": "/contributing/#reviewing-code",
+            "text": "Take part in reviewing pull requests and/or reviewing direct commits.  Make suggestions to improve the code and discuss solutions to overcome weakness in the algorithm.",
+            "title": "Reviewing Code"
+        },
+        {
+            "location": "/contributing/#pull-requests",
+            "text": "Pull requests are welcome, and if you plan on contributing directly to the code, there are a couple of things to be mindful of.    Please describe the change in as much detail as possible so I can understand what is being added or modified.    If you are solving a bug that does not already have an issue, please describe the bug in detail and provide info on how to reproduce if applicable (this is good for me and others to reference later when verifying the issue has been resolved).    Please reference and link related open bugs or feature requests in this pull if applicable.    Make sure you've documented or updated the existing documentation if introducing a new feature or modifying the behavior of an existing feature that a user needs to be aware of.  I will not accept new features or changes to existing features if you have not provided documentation describing the feature.    Continuous integration tests on are run on all pull requests and commits via Travis CI.  When making a pull request, the tests will automatically be run, and the request must pass to be accepted.  You can (and should) run these tests before pull requesting.  If it is not possible to run these tests locally, they will be run when the pull request is made, but it is strongly suggested that requesters make an effort to verify before requesting to allow for a quick, smooth merge.",
+            "title": "Pull Requests"
+        },
+        {
+            "location": "/contributing/#running-validation-tests",
+            "text": "Tip  If you are running Sublime on a OSX or Linux/Unix system, you run all tests by by running the shell script (assuming you have installed your environment fulfills all requirements below):  chmod +x run_tests.sh\n./run_tests.sh   There are a couple of dependencies that must be present before running the tests.    As  ST3  is the only current, actively supported version, Python 3 must be used to validate the tests.    Unit tests are run with pytest ( pytest-dev/pytest ).  You can install pytest via:  pip install pytest  The tests should be run from the root folder of the plugin by using the following command:  py.test .    Linting is performed on the entire project with the following modules:   pycqa/flake8  pycqa/flake8-docstrings  ebeweber/flake8-mutable  gforcada/flake8-builtins  pycqa/pep8-naming   These can be installed via:  pip install flake8\npip install flake8-docstrings\npip install flake8-mutable\npip install flake8-builtins\npip install pep8-naming  Linting is performed with the following command:  flake8 .",
+            "title": "Running Validation Tests"
+        },
+        {
+            "location": "/contributing/#documentation-improvements",
+            "text": "A ton of time has been spent not only creating and supporting this plugin, but also spent making this documentation.  If you feel it is still lacking, show your appreciation for the plugin by helping to improve the documentation.  Help with documentation is always appreciated and can be done via pull requests.  There shouldn't be any need to run validation tests if only updating documentation.  You don't have to render the docs locally before pull requesting, but if you wish to, I currently use a combination of  mkdocs/mkdocs , the  squidfunk/mkdocs-material , and  facelessuser/pymdown-extensions  to render the docs.  You can preview the docs if you install these two packages.  The command for previewing the docs is  mkdocs serve  from the root directory. You can then view the documents at  localhost:8000 .",
+            "title": "Documentation Improvements"
+        },
+        {
+            "location": "/license/",
+            "text": "License\n\ue157\n\n\nHex Viewer is released under the MIT license.\n\n\nCopyright \u00a9 2011 - 2017 Isaac Muse \nisaacmuse@gmail.com\n\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+            "title": "License"
+        },
+        {
+            "location": "/license/#license",
+            "text": "Hex Viewer is released under the MIT license.  Copyright \u00a9 2011 - 2017 Isaac Muse  isaacmuse@gmail.com  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+            "title": "License"
+        }
+    ]
+}
