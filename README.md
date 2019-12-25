@@ -56,6 +56,7 @@ HexViewer is a plugin for Sublime Text that allows the toggling of a file into a
 search for **`HexViewer`** and press <kbd>Enter</kbd>
 
 See also:
+
 1. [ITE - Integrated Toolset Environment](https://github.com/evandrocoan/ITE)
 1. [Package control docs](https://packagecontrol.io/docs/usage) for details.
 
